@@ -12,6 +12,7 @@ function SignupFormModal() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [accessCode, setAccessCode] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
@@ -19,7 +20,7 @@ function SignupFormModal() {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+      return dispatch(sessionActions.signup({ email, username, firstName, lastName, password, accessCode }))
         .then(closeModal)
         .catch(async (res) => {
           const data = await res.json();
@@ -87,6 +88,15 @@ function SignupFormModal() {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Access Code
+          <input
+            type="number"
+            value={accessCode}
+            onChange={(e) => setAccessCode(e.target.value)}
             required
           />
         </label>
