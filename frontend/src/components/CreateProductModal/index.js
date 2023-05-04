@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import * as sessionActions from "../../store/session";
+import { createNewProduct } from "../../store/products";
 
 function CreateProductModal() {
   const dispatch = useDispatch();
@@ -14,17 +14,14 @@ function CreateProductModal() {
   const { closeModal } = useModal();
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // if (password === confirmPassword) {
-    //   setErrors([]);
-    //   return dispatch(sessionActions.signup({ email, username, firstName, lastName, password, accessCode }))
-    //     .then(closeModal)
-    //     .catch(async (res) => {
-    //       const data = await res.json();
-    //       if (data && data.errors) setErrors(data.errors);
-    //     });
-    // }
-    // return setErrors(['Confirm Password field must be the same as the Password field']);
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(createNewProduct({ name, description, price, stock, imageUrl }))
+      .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+    });
   };
 
   return (
@@ -53,12 +50,13 @@ function CreateProductModal() {
           />
         </label>
         <label>
-          Price
+          Price $
           <input
             type="number"
             step='.01'
             value={price}
             precision={2}
+            min={'.01'}
             onChange={(e) => setPrice(e.target.value)}
             required
           />
@@ -68,6 +66,7 @@ function CreateProductModal() {
           <input
             type="number"
             value={stock}
+            min={1}
             onChange={(e) => setStock(e.target.value)}
             required
           />
@@ -81,7 +80,7 @@ function CreateProductModal() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Create</button>
       </form>
     </>
   );

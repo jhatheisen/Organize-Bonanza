@@ -8,6 +8,8 @@ import OpenModalButton from "../OpenModalButton";
 import { useHistory } from 'react-router-dom';
 import CreateProductModal from "../CreateProductModal";
 
+import ProductButton from "./ProductButton";
+
 function ProductsPage() {
 
   const dispatch = useDispatch();
@@ -88,6 +90,11 @@ function ProductsPage() {
     localStorage.setItem("list", stringList);
   }
 
+  const nextPage = async () => {
+    const products = await dispatch(nextPageProducts(currPage + 1));
+    if (products.Products.length == 0) window.alert('No more products to load!')
+  }
+
 
   return (
     <>
@@ -121,6 +128,8 @@ function ProductsPage() {
           buttonText="Create Product"
           modalComponent={<CreateProductModal />}
         />
+      <div style={{display:'flex', flexWrap:'wrap'}}>
+
       {products &&
         products.Products.map(product => {
 
@@ -128,6 +137,7 @@ function ProductsPage() {
             <div className="productBox">
               <p>{product.name}</p>
               <p>{product.description}</p>
+              <ProductButton product={product}/>
               <img src={product.imageUrl} style={{width: '100px', height: '100px'}}></img>
               <p>${product.price}</p>
               <p>{product.stock} in stock</p>
@@ -136,8 +146,9 @@ function ProductsPage() {
           )
         })
       }
+      </div>
     </div>
-    <button onClick={() => dispatch(nextPageProducts(currPage + 1))}>Load More</button>
+    <button onClick={nextPage}>Load More</button>
     </>
   )
 }
