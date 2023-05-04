@@ -15,7 +15,6 @@ const OrdersPage = () => {
   useEffect(() => {
     const loadOrders = async () => {
       let res = await dispatch(loadOrders());
-      console.log(res.json())
     }
 
     loadOrders()
