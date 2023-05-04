@@ -16,7 +16,6 @@ function EditProductFormModal({product}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    console.log(stock)
     return dispatch(modifyProduct({ id: product.id, name, description, price, stock: parseInt(stock), imageUrl }))
       .then(closeModal)
       .catch(async (res) => {
