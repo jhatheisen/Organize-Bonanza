@@ -36,14 +36,14 @@ function Navigation({ isLoaded }){
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
-          className='p-3 text-xl text-blue-500 hover:text-blue-300'
+          className='p-4 text-xl text-blue-500 hover:text-blue-300'
         />
       </li>
       <li className='mr-6'>
         <OpenModalButton
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
-          className='p-3 text-xl text-blue-500 hover:text-blue-300'
+          className='p-4 text-xl text-blue-500 hover:text-blue-300'
         />
       </li>
       <li className='mr-6 flex p-2'>
@@ -59,11 +59,11 @@ function Navigation({ isLoaded }){
         <img src={logo} className='h-11'></img>
       </div>
       { sessionUser && (
-        <li className='mr-6 flex'><NavLink exact to='/orders' className='p-3 text-xl text-blue-500 hover:text-blue-300'>Orders</NavLink></li>
+        <li className='mr-6 flex'><NavLink exact to='/orders' className='p-4 text-xl text-blue-500 hover:text-blue-300'>Orders</NavLink></li>
         )}
       <li className='mr-6 flex'>
         { sessionUser &&
-          <NavLink exact to="/products" className='p-3 text-xl text-blue-500 hover:text-blue-300'>Products</NavLink>
+          <NavLink exact to="/products" className='p-4 text-xl text-blue-500 hover:text-blue-300'>Products</NavLink>
         }
       </li>
       {isLoaded && sessionLinks}
