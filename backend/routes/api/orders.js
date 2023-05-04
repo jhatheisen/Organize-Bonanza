@@ -27,6 +27,16 @@ router.get('/', async (req, res) => {
     return res.json({Orders: orders})
 })
 
+router.get('/bad', async (req, res) => {
+  res.status(500);
+      return res.json(
+        {
+          message: "Test Error",
+          statusCode: 500
+        }
+      );
+})
+
 router.get('/:id', async (req, res) => {
 
   // authentication 401

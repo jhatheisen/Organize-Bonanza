@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
+import { useState } from "react";
 import { loadOrders } from "../../store/orders";
 import OpenModalButton from "../OpenModalButton";
 import CreateOrderModal from "../CreateOrderModal";
@@ -9,13 +10,21 @@ const OrdersPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [errors, setErrors] = useState([]);
 
   const orders = useSelector(state => state.orders);
 
-  useEffect(async() => {
-    let res = await dispatch(loadOrders());
-    console.log(res.json());
+  useEffect(() => {
+    handleLoad();
   },[])
+
+  const handleLoad = (e) => {
+    return dispatch(loadOrders())
+      .catch(async (res) => {
+        const data = await res.json();
+        if (!data.ok) console.log(data);
+      })
+  }
 
   if (!orders.Orders) return null;
 
