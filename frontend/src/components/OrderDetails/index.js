@@ -22,35 +22,48 @@ const OrdersDetails = () => {
 
   console.log(detailedOrder.products)
 
+  const pC = "font-bold text-zinc-700";
+
   return (
-    <>
-      <h1>Order Details</h1>
+    <div className="m-2 flex flex-col">
+      <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-zinc-800">Order Details</h1>
       <OpenModalButton
           buttonText="Edit Order"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2 w-28"
           modalComponent={<EditOrderFormModal order={detailedOrder.Order}/>}
         />
-      <p>{detailedOrder.Order.id}</p>
-      <p>{detailedOrder.Order.trackingCompany}</p>
-      <p>{detailedOrder.Order.trackingNumber}</p>
-      <p>{detailedOrder.Order.status}</p>
-      <p>{detailedOrder.Order.createdAt}</p>
+      <div className="m-5 p-3 shadow-lg rounded flex flex-col w-60">
+        <p className={pC}>Order # : {detailedOrder.Order.id}</p>
+        <p className={pC}>Shipping Company : {detailedOrder.Order.trackingCompany}</p>
+        <p className={pC}>Tracking # : {detailedOrder.Order.trackingNumber}</p>
+        <p className={pC}>Order Status : {detailedOrder.Order.status}</p>
+        <p className={pC}>Order Date : {detailedOrder.Order.createdAt.slice(0,10)}</p>
+      </div>
       <hr></hr>
-      <h2>Products</h2>
-      {detailedOrder.products &&
-        detailedOrder.products.map(product => (
-        <>
-          <p>{product.name}</p>
-          <p>x {product.quantity}</p>
-        </>
-        ))
-      }
-      {detailedOrder.products.length == 0 && (
-        <>
-          <p>Sorry no products for this order, add some.</p>
-        </>
-      )
-      }
-    </>
+      <div className="m-5">
+        <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-zinc-800">Products</h2>
+        <div className="flex">
+          {detailedOrder.products &&
+            detailedOrder.products.map(product => (
+            <div className="w-60 rounded overflow-hidden shadow-lg m-5">
+              <img className="w-full h-40 object-cover"  src={product.imageUrl}/>
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">{product.name}</div>
+                <div className="flex justify-between">
+                  <p className="text-gray-700 text-base">{product.description}</p>
+                  <p className="text-gray-700 text-base">Quantity: {product.quantity}</p>
+                </div>
+                  <p className="text-gray-700 text-base">${product.price}</p>
+              </div>
+            </div>
+            ))
+          }
+        </div>
+        {detailedOrder.products.length == 0 && (
+          <p className="mb-2 m-3 text-lg tracking-tight text-gray-900 dark:text-zinc-800">No products for this order. Add some from the products page.</p>
+        )}
+      </div>
+    </div>
   )
 }
 
