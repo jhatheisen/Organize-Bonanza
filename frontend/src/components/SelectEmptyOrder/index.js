@@ -42,16 +42,20 @@ function SelectEmptyOrder({list}) {
 
   if (!orders.Orders) return null;
 
+  const textC =  "mb-2 text-xl tracking-tight text-gray-900 dark:text-white";
+
   return (
-    <div>
-      <h1>Select an order to add items to</h1>
-      {emptyOrders.map(order =>
-        <div onClick={() => addItemsToOrder(order.id)} style={{border: '1px solid black'}}>
-          <p>Order: {order.id}</p>
-          <p>Tracking Num: {order.trackingNumber}</p>
-          <p>{order.status}</p>
-        </div>
+    <div className="flex flex-col items-center">
+      <h1 className="px-5 pt-5 mb-2 mt-0 text-3xl font-medium leading-tight text-primary">Select an order to add items to</h1>
+      <div className="flex justify-center">
+        {emptyOrders.map(order =>
+          <div onClick={() => addItemsToOrder(order.id)} className="cursor-pointer block max-w-sm p-5 m-2 bg-white border border-white-200 rounded-lg shadow hover:bg-zinc-100 dark:bg-zinc-500 dark:border-zinc-700 dark:hover:bg-zinc-700">
+            <p className={textC}>Order # : {order.id}</p>
+            <p className={textC}>Tracking # : {order.trackingNumber}</p>
+            <p className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Status : {order.status}</p>
+          </div>
       )}
+      </div>
       {emptyOrders.length == 0 &&
         <p>No empty orders. Create a new order to add items.</p>
       }

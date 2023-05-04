@@ -96,12 +96,48 @@ function ProductsPage() {
     if (products.Products.length == 0) window.alert('No more products to load!')
   }
 
+  const textC =  "mb-2 text-xl tracking-tight text-gray-900 dark:text-white";
 
   return (
-    <>
-    <hr></hr>
-    <div className="productsPageContent">
-      <h3>List</h3>
+    <div className="flex justify-between m-2">
+      <div className="productsPageContent">
+        <OpenModalButton
+            buttonText="Create Product"
+            modalComponent={<CreateProductModal />}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+          />
+        <div style={{display:'flex', flexWrap:'wrap'}}>
+
+        <div className="flex flex-wrap">
+          {products &&
+            products.Products.map(product => {
+
+              return (
+                <div className="productBox">
+                  <div className="w-60 min-h-[330px] rounded overflow-hidden shadow-lg m-5">
+                    <img className="w-full h-40 object-cover"  src={product.imageUrl}/>
+                    <div className="px-6 py-4">
+                      <div className="font-bold text-xl mb-2">{product.name}</div>
+                      <div className="flex justify-between">
+                        <p className="text-gray-700 text-base">{product.description}</p>
+                        <p className="text-gray-700 text-base">{product.stock} in stock</p>
+                      </div>
+                      <p className="text-gray-700 text-base">${product.price}</p>
+                      { product.stock != 0 && (
+                        <button onClick={() => addToList(product)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mt-2">Add To List</button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+          }
+        </div>
+        </div>
+    <button onClick={nextPage} className="bg-zinc-500 hover:bg-zinc-700 text-white font-bold py-2 px-4 rounded m-2">Load More</button>
+    </div>
+    <div className="flex flex-col justify-center items-start">
+    <h3 className="text-2xl font-bold">List</h3>
       {list.map(product => {
 
         // make product quantity selects
@@ -112,55 +148,33 @@ function ProductsPage() {
         }
 
         return (
-          <>
-            <p>{product.name}</p>
-            <img src={product.imageUrl} style={{width: '100px', height: '100px'}}></img>
-            <select value={product.quantity} onChange={(e) => editProduct(product.id, e.target.value)}>
-              {options}
-            </select>
-            <button onClick={() => removeFromList(product.id)}>Remove</button>
-          </>
+          <div className="rounded overflow-hidden shadow-lg">
+            <div className="w-40" >
+              <img src={product.imageUrl} class="w-full h-24 object-cover"></img>
+            </div>
+            <div className="px-6 py-4">
+              <p className="font-bold text-xl mb-2">{product.name}</p>
+              <select className value={product.quantity} onChange={(e) => editProduct(product.id, e.target.value)} className="w-10">
+                {options}
+              </select>
+              <button onClick={() => removeFromList(product.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">Remove</button>
+            </div>
+          </div>
         );
       })}
       { list.length ? (
         <OpenModalButton
             buttonText="Add items to order"
             modalComponent={<SelectEmptyOrder list={list} />}
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2"
           />
       ) : (
         <p>No items yet, add some to make a list</p>
       )
 
       }
-      <hr></hr>
-      <OpenModalButton
-          buttonText="Create Product"
-          modalComponent={<CreateProductModal />}
-        />
-      <div style={{display:'flex', flexWrap:'wrap'}}>
-
-      {products &&
-        products.Products.map(product => {
-
-          return (
-            <div className="productBox">
-              <p>{product.name}</p>
-              <p>{product.description}</p>
-              <ProductButton product={product}/>
-              <img src={product.imageUrl} style={{width: '100px', height: '100px'}}></img>
-              <p>${product.price}</p>
-              <p>{product.stock} in stock</p>
-              { product.stock != 0 && (
-                <button onClick={() => addToList(product)}>Add To List</button>
-              )}
-            </div>
-          )
-        })
-      }
-      </div>
     </div>
-    <button onClick={nextPage}>Load More</button>
-    </>
+    </div>
   )
 }
 
