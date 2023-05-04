@@ -36,19 +36,21 @@ function ProfileButton({ user }) {
     return history.push('/');
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "profile-dropdown absolute top-12 right-0 bg-zinc-700 flex-col rounded" + (showMenu ? "" : " hidden");
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <li className="mr-6 flex">
+        <button onClick={openMenu} className="p-3">
+          <i className="fas fa-user-circle fa-2x" style={{color: '#60a5fa'}}/>
+        </button>
+      </li>
       <ul className={ulClassName} ref={ulRef}>
-        <li>{user.username}</li>
-        <li>{user.firstName} {user.lastName}</li>
-        <li>{user.email}</li>
-        <li>
-          <button onClick={logout}>Log Out</button>
+        <li className="p-2 text-m text-blue-500">{user.username}</li>
+        <li className="p-2 text-m text-blue-500">{user.firstName} {user.lastName}</li>
+        <li className="p-2 text-m text-blue-500">{user.email}</li>
+        <li className='p-2'>
+          <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Log Out</button>
         </li>
       </ul>
     </>

@@ -30,31 +30,39 @@ function Navigation({ isLoaded }){
     );
   } else {
     sessionLinks = (
-      <li>
+      <div className='flex'>
+      <li className='mr-6'>
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
+          className='p-3 text-xl text-blue-500 hover:text-blue-300'
         />
+      </li>
+      <li className='mr-6'>
         <OpenModalButton
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
+          className='p-3 text-xl text-blue-500 hover:text-blue-300'
         />
-        <button onClick={demoLogin}>Demo User</button>
       </li>
+      <li className='mr-6 flex p-2'>
+        <button onClick={demoLogin} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded'>Demo User</button>
+      </li>
+      </div>
     );
   }
 
   return (
-    <ul>
-      <li>
+    <ul className='flex justify-between bg-zinc-700'>
+      { sessionUser && (
+        <li className='mr-6 flex'><NavLink exact to='/orders' className='p-3 text-xl text-blue-500 hover:text-blue-300'>Orders</NavLink></li>
+        )}
+      <li className='mr-6 flex'>
         { sessionUser ?
-          <NavLink exact to="/products">Products</NavLink> :
-          <NavLink exact to="/splash">Products</NavLink>
+          <NavLink exact to="/products" className='p-3 text-xl text-blue-500 hover:text-blue-300'>Products</NavLink> :
+          <NavLink exact to="/splash" className='p-3 text-xl text-blue-500 hover:text-blue-300'>Products</NavLink>
         }
       </li>
-      { sessionUser && (
-        <li><NavLink exact to='/orders'>Orders</NavLink></li>
-        )}
       {isLoaded && sessionLinks}
     </ul>
   );
