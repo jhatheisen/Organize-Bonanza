@@ -45,10 +45,13 @@ function Navigation({ isLoaded }){
     <ul>
       <li>
         { sessionUser ?
-<NavLink exact to="/products">Home</NavLink> :
-<NavLink exact to="/splash">Home</NavLink>
+          <NavLink exact to="/products">Products</NavLink> :
+          <NavLink exact to="/splash">Products</NavLink>
         }
       </li>
+      { sessionUser && (
+        <li><NavLink exact to='/orders'>Orders</NavLink></li>
+        )}
       {isLoaded && sessionLinks}
     </ul>
   );

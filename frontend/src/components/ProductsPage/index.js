@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import CreateProductModal from "../CreateProductModal";
 
 import ProductButton from "./ProductButton";
+import SelectEmptyOrder from "../SelectEmptyOrder";
 
 function ProductsPage() {
 
@@ -100,6 +101,7 @@ function ProductsPage() {
     <>
     <hr></hr>
     <div className="productsPageContent">
+      <h3>List</h3>
       {list.map(product => {
 
         // make product quantity selects
@@ -111,10 +113,8 @@ function ProductsPage() {
 
         return (
           <>
-            <h3>List</h3>
             <p>{product.name}</p>
             <img src={product.imageUrl} style={{width: '100px', height: '100px'}}></img>
-            {/* <p>quantity:{product.quantity}</p> */}
             <select value={product.quantity} onChange={(e) => editProduct(product.id, e.target.value)}>
               {options}
             </select>
@@ -122,7 +122,16 @@ function ProductsPage() {
           </>
         );
       })}
-      <button>Create Order</button>
+      { list.length ? (
+        <OpenModalButton
+            buttonText="Add items to order"
+            modalComponent={<SelectEmptyOrder list={list} />}
+          />
+      ) : (
+        <p>No items yet, add some to make a list</p>
+      )
+
+      }
       <hr></hr>
       <OpenModalButton
           buttonText="Create Product"
@@ -141,7 +150,9 @@ function ProductsPage() {
               <img src={product.imageUrl} style={{width: '100px', height: '100px'}}></img>
               <p>${product.price}</p>
               <p>{product.stock} in stock</p>
-              <button onClick={() => addToList(product)}>Add To List</button>
+              { product.stock != 0 && (
+                <button onClick={() => addToList(product)}>Add To List</button>
+              )}
             </div>
           )
         })
