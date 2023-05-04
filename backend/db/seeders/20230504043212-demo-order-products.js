@@ -47,7 +47,7 @@ module.exports = {
     options.tableName = 'OrderProducts';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      trackingNumber: { [Op.in]: [123456, 654321] }
+      id: { [Op.in]: [1, 2, 3, 4, 5, 6] }
     }, {});
   }
 };
