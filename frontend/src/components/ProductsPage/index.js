@@ -40,9 +40,9 @@ function ProductsPage() {
     let existingProduct = listCopy.find(element => element.id == id)
 
     // if id in list
-    if (existingProduct) {
+    if (existingProduct && existingProduct.quantity != existingProduct.stock ) {
       existingProduct.quantity++;
-    } else {
+    } else if (!existingProduct) {
       product.quantity = 1;
       listCopy.push(product)
     }
