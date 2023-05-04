@@ -32,6 +32,7 @@ router.get('/', async (req, res) => {
   const products = await Product.findAll({
     limit,
     offset,
+    order: [ ['name']]
   });
 
   return res.json({
