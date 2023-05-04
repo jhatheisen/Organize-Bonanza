@@ -13,7 +13,13 @@ const OrdersPage = () => {
   const orders = useSelector(state => state.orders);
 
   useEffect(() => {
-    dispatch(loadOrders());
+    const loadOrders = async () => {
+      let res = await dispatch(loadOrders());
+      console.log(res.json())
+    }
+
+    loadOrders()
+    .catch(console.error)
   },[])
 
   if (!orders.Orders) return null;
