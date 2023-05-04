@@ -7,15 +7,18 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import * as sessionActions from '../../store/session';
 import './Navigation.css';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Navigation({ isLoaded }){
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user);
 
-  const demoLogin = (e) => {
-    dispatch(sessionActions.login({credential: "DemoUser1", password: "password1"}));
+  const demoLogin = async (e) => {
+    await dispatch(sessionActions.login({credential: "DemoUser1", password: "password1"}));
+    history.push(`/orders`)
   }
 
   let sessionLinks;

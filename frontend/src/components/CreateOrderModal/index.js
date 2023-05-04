@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createNewOrder } from "../../store/orders";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function CreateOrderModal() {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ function CreateOrderModal() {
   const [status , setStatus] = useState();
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
