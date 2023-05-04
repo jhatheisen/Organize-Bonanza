@@ -33,9 +33,9 @@ const OrdersPage = () => {
 
   return (
     <>
-    <h3 className="px-5 pt-5 mb-2 mt-0 text-3xl font-medium leading-tight text-primary">Create a new order or select below</h3>
+    <h3 className="px-5 pt-5 mb-2 mt-0 text-3xl font-medium leading-tight text-primary">Create a new order or click below to view one.</h3>
      <OpenModalButton
-          buttonText="Create New Order"
+          buttonText={<p><i class="far fa-plus-square fa-lg"></i> Create Order</p>}
           modalComponent={<CreateOrderModal />}
           className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-5"}
         />

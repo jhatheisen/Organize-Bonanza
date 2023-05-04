@@ -28,8 +28,8 @@ const OrdersDetails = () => {
     <div className="m-2 flex flex-col">
       <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-zinc-800">Order Details</h1>
       <OpenModalButton
-          buttonText="Edit Order"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2 w-28"
+          buttonText={<p><i class="fas fa-edit"></i> Edit Order</p>}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2 w-36"
           modalComponent={<EditOrderFormModal order={detailedOrder.Order}/>}
         />
       <div className="m-5 p-3 shadow-lg rounded flex flex-col w-60">

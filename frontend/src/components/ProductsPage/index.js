@@ -101,10 +101,11 @@ function ProductsPage() {
   return (
     <div className="flex justify-between m-2">
       <div className="productsPageContent">
+      <h3 className="px-5 pt-5 mb-2 mt-0 text-3xl font-medium leading-tight text-primary">Products</h3>
         <OpenModalButton
-            buttonText="Create Product"
+            buttonText={<p><i class="far fa-plus-square fa-lg"></i> Create Product</p> }
             modalComponent={<CreateProductModal />}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
           />
         <div style={{display:'flex', flexWrap:'wrap'}}>
 
@@ -123,9 +124,12 @@ function ProductsPage() {
                         <p className="text-gray-700 text-base">{product.stock} in stock</p>
                       </div>
                       <p className="text-gray-700 text-base">${product.price}</p>
-                      { product.stock != 0 && (
-                        <button onClick={() => addToList(product)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mt-2">Add To List</button>
-                      )}
+                      <div className="flex justify-between">
+                        <ProductButton product={product}/>
+                        { product.stock != 0 && (
+                          <button onClick={() => addToList(product)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mt-2"><i class="fas fa-cart-plus"></i> Add to list</button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -136,43 +140,41 @@ function ProductsPage() {
         </div>
     <button onClick={nextPage} className="bg-zinc-500 hover:bg-zinc-700 text-white font-bold py-2 px-4 rounded m-2">Load More</button>
     </div>
-    <div className="flex flex-col justify-center items-start">
-    <h3 className="text-2xl font-bold">List</h3>
-      {list.map(product => {
+    <div className="flex flex-col items-start">
+      <h3 className="text-2xl font-bold">List</h3>
+      <div className="p-2 border-2 border-gray-300">
+        {list.map(product => {
 
-        // make product quantity selects
-        let options = [];
+          // make product quantity selects
+          let options = [];
 
-        for (let i = 0; i <= product.stock; i++) {
-          options.push(<option value={i}>{i}</option>)
-        }
+          for (let i = 0; i <= product.stock; i++) {
+            options.push(<option value={i}>{i}</option>)
+          }
 
-        return (
-          <div className="rounded overflow-hidden shadow-lg">
-            <div className="w-40" >
-              <img src={product.imageUrl} class="w-full h-24 object-cover"></img>
+          return (
+            <div className="rounded overflow-hidden shadow-lg">
+              <div className="w-40" >
+                <img src={product.imageUrl} class="w-full h-24 object-cover"></img>
+              </div>
+              <div className="px-6 py-4">
+                <p className="font-bold text-xl mb-2">{product.name}</p>
+                <select value={product.quantity} onChange={(e) => editProduct(product.id, e.target.value)} className="w-10">
+                  {options}
+                </select>
+                <button onClick={() => removeFromList(product.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2"><i class="fas fa-trash-alt"></i></button>
+              </div>
             </div>
-            <div className="px-6 py-4">
-              <p className="font-bold text-xl mb-2">{product.name}</p>
-              <select className value={product.quantity} onChange={(e) => editProduct(product.id, e.target.value)} className="w-10">
-                {options}
-              </select>
-              <button onClick={() => removeFromList(product.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">Remove</button>
-            </div>
-          </div>
-        );
-      })}
-      { list.length ? (
-        <OpenModalButton
-            buttonText="Add items to order"
-            modalComponent={<SelectEmptyOrder list={list} />}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2"
-          />
-      ) : (
-        <p>No items yet, add some to make a list</p>
-      )
-
-      }
+          );
+        })}
+        { list.length ? (
+          <OpenModalButton
+              buttonText="Add items to order"
+              modalComponent={<SelectEmptyOrder list={list} />}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2"
+            />
+        ) : ( <p className="text-xl font-bold tracking-tight text-gray-900 dark:text-zinc-800">No items yet, add some to make a list</p>)}
+      </div>
     </div>
     </div>
   )
