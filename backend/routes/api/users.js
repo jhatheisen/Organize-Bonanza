@@ -9,6 +9,9 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 const validateSignup = [
+  check('accessCode')
+    .equals(process.env.ACCESS_CODE)
+    .withMessage('Access code is invalid.'),
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
@@ -33,7 +36,7 @@ router.post(
   '/',
   validateSignup,
   async (req, res) => {
-    const { email, password, username, firstName, lastName } = req.body;
+    const { email, password, username, firstName, lastName, accessCode } = req.body;
     const user = await User.signup({ email, username, firstName, lastName, password });
 
     await setTokenCookie(res, user);
