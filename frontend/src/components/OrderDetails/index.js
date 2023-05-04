@@ -13,11 +13,14 @@ const OrdersDetails = () => {
 
   const detailedOrder = useSelector(state => state.orders.detailOrder);
 
+
   useEffect(() => {
     dispatch(showDetailOrder(orderId))
   }, [])
 
   if (!detailedOrder) return null;
+
+  console.log(detailedOrder.products)
 
   return (
     <>
