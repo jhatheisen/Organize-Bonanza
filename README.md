@@ -1,3 +1,5 @@
-# Reebelo-Case-Study
+🦉Organize Bonanza
+This is the readme for the Organize Bonanza. A platform for organizeing your inventory and creating orders of your products.
 
-This is the repo for the Reebelo Case Study
+Live Server Link
+[https://organizebonanza.onrender.com](https://organizebonanza.onrender.com)
