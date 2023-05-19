@@ -33,7 +33,7 @@ This is the readme for the Organize Bonanza. A platform for organizing your inve
 
   * Alembic
   
-  *TailwindCSS
+  * TailwindCSS
 
 * Database
 
