@@ -1,5 +1,5 @@
 # 🗃️Organize Bonanza
-This is the readme for the Organize Bonanza. A platform for organizing your inventory and creating orders of your products.
+This is the readme for the Organize Bonanza. A platform for organizing your inventory and creating orders of your products. Make a few orders for yourself and go crazy!
 
 ## Live Server Link
 [https://organizebonanza.onrender.com](https://organizebonanza.onrender.com)
