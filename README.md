@@ -5,9 +5,9 @@ This is the readme for the Organize Bonanza. A platform for organizing your inve
 [https://organizebonanza.onrender.com](https://organizebonanza.onrender.com)
 
 ## Photos
-![image](https://github.com/jhatheisen/Organize-Bonanza/assets/106848904/9b34bb1d-c0a4-45db-a7ea-6e05a4f1f5fa)
-![image](https://github.com/jhatheisen/Organize-Bonanza/assets/106848904/a9a7cce9-0b07-4102-92fb-cce73b94dd18)
-![image](https://github.com/jhatheisen/Organize-Bonanza/assets/106848904/68b94cf5-ecf6-4ea4-979a-5651209e378f)
+![Screenshot 2023-06-20 132252](https://github.com/jhatheisen/Organize-Bonanza/assets/106848904/ebcf594c-ff0e-41fc-a2ab-9dc67b92d8d7)
+![Screenshot 2023-06-20 132312](https://github.com/jhatheisen/Organize-Bonanza/assets/106848904/86837c22-80c6-4999-83ed-7c51a94858cc)
+![Screenshot 2023-06-20 132327](https://github.com/jhatheisen/Organize-Bonanza/assets/106848904/1a2e9eff-efe3-4ef7-aa52-f719797e79e7)
 
 ## Tech Stack
 
